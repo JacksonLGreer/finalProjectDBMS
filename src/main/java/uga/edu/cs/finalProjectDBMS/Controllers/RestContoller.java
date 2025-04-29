@@ -1,4 +1,4 @@
-package uga.edu.cs.finalProjectDBMS;
+package uga.edu.cs.finalProjectDBMS.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -6,8 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestContoller {
     
-    @GetMapping("/")
-    public String testName() {
-        return "Jackson was here";
-    }
+   
 }
