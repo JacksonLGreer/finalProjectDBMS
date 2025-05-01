@@ -19,7 +19,7 @@ public class RegistrationController {
     @GetMapping
     public ModelAndView registerPage(@RequestParam(name = "error", required = false) String error) {
         ModelAndView mv = new ModelAndView("register");
-        //mv.addObject("error", error);
+        mv.addObject("error", error);
         return mv;
     }
 
