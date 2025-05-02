@@ -27,11 +27,11 @@ public class RegistrationController {
     public String register(
             @RequestParam String email,
             @RequestParam String password,
-            @RequestParam String passwordRepeat,
+            @RequestParam String confirmPassword,
             @RequestParam String firstName,
             @RequestParam String lastName) {
 
-        if (!password.equals(passwordRepeat)) {
+        if (!password.equals(confirmPassword)) {
             return "redirect:/register?error=" + URLEncoder.encode("Passwords do not match", StandardCharsets.UTF_8);
         }
 
