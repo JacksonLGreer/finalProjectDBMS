@@ -7,18 +7,28 @@ public class BookDto {
     private int publicationYear;
     private String publisherName;
     private List<AuthorDto> authors;
+    private int bookId;
 
     // Constructors
     public BookDto() {}
 
-    public BookDto(String title, int publicationYear, String publisherName, List<AuthorDto> authors) {
+    public BookDto(String title, int bookId, int publicationYear, String publisherName, List<AuthorDto> authors) {
         this.title = title;
+        this.bookId = bookId;
         this.publicationYear = publicationYear;
         this.publisherName = publisherName;
         this.authors = authors;
     }
 
     // Getters and Setters
+    public int getBookId() {
+        return bookId;
+    }
+    
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
     public String getTitle() {
         return title;
     }

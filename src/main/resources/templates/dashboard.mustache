@@ -20,7 +20,11 @@
     <ul>
         {{#books}}
             <li>
-                <strong>{{title}}</strong> ({{publicationYear}})<br>
+                <strong>
+                    <a href="/book/info?bookId={{bookId}}">
+                        {{title}}
+                    </a>
+                </strong> ({{publicationYear}})<br>
                 Publisher: {{publisherName}}<br>
                 Authors:
                 <ul>
