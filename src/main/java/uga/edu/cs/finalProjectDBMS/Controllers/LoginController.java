@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpSession;
 import uga.edu.cs.finalProjectDBMS.services.UserService;
 
 import java.net.URLEncoder;
@@ -25,9 +27,10 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@RequestParam String email, @RequestParam String password) {
+    public String login(@RequestParam String email, @RequestParam String password, HttpSession session) {
         try {
             if (userService.authenticate(email, password)) {
+                session.setAttribute("user", userService.getLoggedInUser());
                 return "redirect:/dashboard";
             } else {
                 return "redirect:/login?error=" + URLEncoder.encode("Invalid credentials", StandardCharsets.UTF_8);

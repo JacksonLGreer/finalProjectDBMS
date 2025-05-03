@@ -16,6 +16,11 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
+    
     @GetMapping
     public ModelAndView registerPage(@RequestParam(name = "error", required = false) String error) {
         ModelAndView mv = new ModelAndView("register");

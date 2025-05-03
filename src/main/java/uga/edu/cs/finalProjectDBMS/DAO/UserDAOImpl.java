@@ -1,7 +1,6 @@
 package uga.edu.cs.finalProjectDBMS.DAO;
 
 import uga.edu.cs.finalProjectDBMS.Models.User;
-import uga.edu.cs.finalProjectDBMS.Utils.PasswordUtils;
 
 import java.sql.*;
 
@@ -15,7 +14,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean registerUser(User user) {
-        String sql = "INSERT INTO user (email, password_hash, firstName, lastName) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO user (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getPasswordHash());
@@ -38,7 +37,7 @@ public class UserDAOImpl implements UserDAO {
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
                 user.setEmail(rs.getString("email"));
-                user.setPasswordHash(rs.getString("password_hash"));
+                user.setPasswordHash(rs.getString("password"));
                 user.setFirstName(rs.getString("firstName"));
                 user.setLastName(rs.getString("lastName"));
                 return user;
@@ -52,6 +51,6 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public boolean validateUser(String email, String plainPassword) {
         User user = findUserByEmail(email);
-        return user != null && PasswordUtils.checkPassword(plainPassword, user.getPasswordHash());
+        return user != null ; // && PasswordUtils.checkPassword(plainPassword, user.getPasswordHash());
     }
 }

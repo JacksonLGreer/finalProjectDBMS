@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+
+    <nav>
+        <ul>
+            <li><a href="/search">Search Books</a></li>
+            <li><a href="/profile">Your Profile</a></li>
+            <li><a href="/loans/current">Current Loans</a></li>
+            <li><a href="/loans/history">Loan History</a></li>
+        </ul>
+    </nav>
+
+    <h2>Recommended Books</h2>
+    <ul>
+        {{#books}}
+            <li>
+                <strong>{{title}}</strong> ({{publicationYear}})<br>
+                Publisher: {{publisherName}}<br>
+                Authors:
+                <ul>
+                    {{#authors}}
+                        <li>{{firstName}} {{lastName}}</li>
+                    {{/authors}}
+                </ul>
+            </li>
+        {{/books}}
+
+        {{^books}}
+            <p>No books found.</p>
+        {{/books}}
+    </ul>
+</body>
+</html>

@@ -19,7 +19,6 @@ public class HomeController {
     @GetMapping
     public ModelAndView webpage() {
         ModelAndView mv = new ModelAndView("home_page");
-        mv.addObject("message", "This is working now");
         return mv;
 
     }

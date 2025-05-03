@@ -10,9 +10,9 @@ public class User {
     // Constructors
     public User() {}
 
-    public User(String email, String passwordHash, String firstName, String lastName) {
+    public User(String userId, String email, String firstName, String lastName) {
         this.email = email;
-        this.passwordHash = passwordHash;
+        //this.passwordHash = passwordHash;
         this.firstName = firstName;
         this.lastName = lastName;
     }
