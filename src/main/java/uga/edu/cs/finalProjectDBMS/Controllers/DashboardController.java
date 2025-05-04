@@ -44,12 +44,15 @@ public class DashboardController {
         // Random books to show
         List<BookDto> books = bookService.getRandomBooksWithDetails();
         mv.addObject("books", books);
+        
+        mv.addObject("loan", loan != null);
 
-        // Flash loan messages
-        if ("success".equals(loan)) mv.addObject("loanSuccess", true);
-        if ("failed".equals(loan)) mv.addObject("loanFailed", true);
-        if ("error".equals(loan)) mv.addObject("loanError", true);
-        if ("not_logged_in".equals(loan)) mv.addObject("loanNotLoggedIn", true);
+    if (loan != null) {
+        mv.addObject("isLoanSuccess", "success".equals(loan));
+        mv.addObject("isLoanFailed", "failed".equals(loan));
+        mv.addObject("isLoanNotLoggedIn", "not_logged_in".equals(loan));
+        mv.addObject("isLoanError", "error".equals(loan));
+    }
 
         // Add current loans
         try {
