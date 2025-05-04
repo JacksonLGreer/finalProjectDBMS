@@ -63,6 +63,20 @@ public class UserDAOImpl implements UserDAO {
         return user != null ; // && PasswordUtils.checkPassword(plainPassword, user.getPasswordHash());
     }
 
+    public boolean updateUser(User user) {
+    String sql = "UPDATE user SET firstName = ?, lastName = ?, email = ? WHERE userId = ?";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, user.getFirstName());
+        stmt.setString(2, user.getLastName());
+        stmt.setString(3, user.getEmail());
+        stmt.setInt(4, user.getUserId());
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+    
     public boolean loanBook(int bookId, int userId) {
         String sql = "INSERT INTO loan (loanDate, returnDate, bookId, userId) VALUES (CURDATE(), NULL, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
