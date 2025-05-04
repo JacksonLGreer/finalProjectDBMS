@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Search Books or Authors</title>
+</head>
+<body>
+    <h1>Search the Library</h1>
+
+    <form action="/search/results" method="get">
+        <label for="query">Search:</label>
+        <input type="text" id="query" name="query" required>
+
+        <label for="type">Search by:</label>
+        <select id="type" name="type">
+            <option value="book">Book Title</option>
+            <option value="author">Author Name</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    {{#results}}
+        <h2>Search Results</h2>
+        <ul>
+            {{#books}}
+                <li>
+                    <a href="/book/info?bookId={{bookId}}"><strong>{{title}}</strong></a><br>
+                    Publisher: {{publisherName}}<br>
+                    Year: {{publicationYear}}<br>
+                    Authors:
+                    <ul>
+                        {{#authors}}
+                            <li>{{firstName}} {{lastName}}</li>
+                        {{/authors}}
+                    </ul>
+                </li>
+            {{/books}}
+        </ul>
+    {{/results}}
+
+    {{^results}}
+        {{#query}}
+            <p>No results found for "<strong>{{query}}</strong>".</p>
+        {{/query}}
+    {{/results}}
+
+</body>
+</html>
