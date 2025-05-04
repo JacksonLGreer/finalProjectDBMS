@@ -1,0 +1,173 @@
+/* General Reset and Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    color: #222;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0;
+    text-align: center;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+/* Layout Helpers */
+.container, .form-container, .book-container, .loan-card {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Loan Cards */
+.loan-card {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+.loan-card strong {
+    font-size: 1.1rem;
+}
+
+.loan-card form {
+    margin-top: 10px;
+}
+
+.loan-card em {
+    color: #cc0000;
+    font-style: italic;
+}
+
+/* Book Info */
+.book-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.book-container p {
+    margin: 8px 0;
+}
+
+.book-container ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.loan-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.loan-button:hover {
+    background-color: #005fa3;
+}
+
+/* Links */
+a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Error and Success Messages */
+p[style*="color: red"] {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+p[style*="color: green"] {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
