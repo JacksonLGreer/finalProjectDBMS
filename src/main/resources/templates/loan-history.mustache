@@ -2,15 +2,22 @@
 <html>
 <head>
     <title>Loan History</title>
+    <link rel="stylesheet" href="/css.css"></link>
 </head>
 <body>
     <h1>Loan History</h1>
 
     {{#loans}}
-        <div style="margin-bottom: 20px;">
+        <div class="loan-card">
             <strong>{{title}}</strong> ({{publicationYear}})<br>
             Loaned on: {{loanDate}}<br>
-            Returned: {{#returnDate}}{{returnDate}}{{/returnDate}}{{^returnDate}}<em>Not yet returned</em>{{/returnDate}}
+            Returned:
+            {{#returnDate}}
+                {{returnDate}}
+            {{/returnDate}}
+            {{^returnDate}}
+                <em>Not yet returned</em>
+            {{/returnDate}}
         </div>
     {{/loans}}
 

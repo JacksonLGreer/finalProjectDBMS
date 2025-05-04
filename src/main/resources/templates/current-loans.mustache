@@ -2,22 +2,22 @@
 <html>
 <head>
     <title>Current Loans</title>
+    <link rel="stylesheet" href="/css.css"></link>
 </head>
 <body>
     <h1>Current Loans</h1>
 
     {{#loans}}
-    <div style="margin-bottom: 20px;">
-        <strong>{{title}}</strong> ({{publicationYear}})<br>
-        Loaned on: {{loanDate}}<br>
+        <div class="loan-card">
+            <strong>{{title}}</strong> ({{publicationYear}})<br>
+            Loaned on: {{loanDate}}<br>
 
-        <form action="/loan/return" method="post" style="margin-top: 5px;">
-    <input type="hidden" name="loanId" value="{{loanId}}">
-    <button type="submit">Return Book</button>
-</form>
-
-    </div>
-{{/loans}}
+            <form action="/loan/return" method="post">
+                <input type="hidden" name="loanId" value="{{loanId}}">
+                <button type="submit">Return Book</button>
+            </form>
+        </div>
+    {{/loans}}
 
     {{^loans}}
         <p>You currently have no active loans.</p>

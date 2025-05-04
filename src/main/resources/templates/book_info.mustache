@@ -3,41 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Book Info</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-            background-color: #f9f9f9;
-        }
-        .book-container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .book-container h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        .book-container p {
-            margin: 6px 0;
-        }
-        .loan-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .loan-button:hover {
-            background-color: #3367d6;
-        }
-    </style>
+    <link rel="stylesheet" href="/css.css" />
 </head>
 <body>
 
@@ -45,19 +11,18 @@
     <h1>{{title}}</h1>
     <p><strong>Publication Year:</strong> {{publicationYear}}</p>
     <p><strong>Publisher:</strong> {{publisherName}}</p>
-    <p><strong>Authors:</strong>
-        <ul>
-            {{#authors}}
-                <li>{{firstName}} {{lastName}}</li>
-            {{/authors}}
-        </ul>
-    </p>
+
+    <p><strong>Authors:</strong></p>
+    <ul>
+        {{#authors}}
+            <li>{{firstName}} {{lastName}}</li>
+        {{/authors}}
+    </ul>
 
     <form method="post" action="/loan">
-    <input type="hidden" name="bookId" value="{{bookId}}">
-    <button type="submit" class="loan-button">Loan this Book</button>
-</form>
-
+        <input type="hidden" name="bookId" value="{{bookId}}">
+        <button type="submit" class="loan-button">Loan this Book</button>
+    </form>
 </div>
 
 </body>
