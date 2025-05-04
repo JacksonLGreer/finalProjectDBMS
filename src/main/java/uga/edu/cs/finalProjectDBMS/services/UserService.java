@@ -86,9 +86,12 @@ public class UserService {
     public boolean loanBookToUser(int bookId, int userId) throws SQLException {
         try (Connection conn = getConnection()) {
             UserDAOImpl dao = new UserDAOImpl(conn);
-            return dao.loanBook(bookId, userId);
+            if (dao.isBookCurrentlyLoaned(bookId)) {
+                return false; // don't allow double-loaning
         }
+        return dao.loanBook(bookId, userId);
     }
+}
 
     public void returnLoan(int loanId) throws SQLException {
         String sql = "UPDATE loan SET returnDate = CURDATE() WHERE loanId = ?";

@@ -88,5 +88,18 @@ public class UserDAOImpl implements UserDAO {
             return false;
         }
     }
+
+    public boolean isBookCurrentlyLoaned(int bookId) throws SQLException {
+    String sql = "SELECT COUNT(*) FROM loan WHERE bookId = ? AND returnDate IS NULL";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, bookId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+    }
+    return false;
+}
+
     
 }
