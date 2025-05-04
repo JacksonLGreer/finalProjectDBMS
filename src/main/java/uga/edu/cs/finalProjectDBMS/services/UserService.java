@@ -13,8 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
 @Service
 public class UserService {
 
@@ -35,15 +33,6 @@ public class UserService {
         return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
     }
 
-    /** 
-    public boolean authenticate(String email, String password) throws SQLException {
-        try (Connection conn = getConnection()) {
-            UserDAOImpl dao = new UserDAOImpl(conn);
-            return dao.validateUser(email, password);
-        }
-    }
-        */
-
     public boolean registerUser(String email, String password, String firstName, String lastName) throws SQLException {
         try (Connection conn = getConnection()) {
             UserDAOImpl dao = new UserDAOImpl(conn);
@@ -52,51 +41,19 @@ public class UserService {
         }
     }
 
-    public void unAuthenticate() {
-        // You can invalidate a session or clear auth here if needed
-    }
-
-    public User getLoggedInUser() {
-        return loggedInUser;
-    }
-
-
-    public boolean loanBookToUser(int bookId, int userId) throws SQLException {
-        try (Connection conn = getConnection()) {
-            UserDAOImpl dao = new UserDAOImpl(conn);
-            return dao.loanBook(bookId, userId);
-        }
-    }
-    
-    /**
-     * Authenticate user given the username and the password and
-     * stores user object for the logged in user in session scope.
-     * Returns true if authentication is succesful. False otherwise.
-     */
     public boolean authenticate(String email, String password) throws SQLException {
-        // Note the ? mark in the query. It is a place holder that we will later replace.
-        final String sql = "select * from user where email = ?";
-        try (Connection conn = getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Following line replaces the first place holder with username.
+        final String sql = "SELECT * FROM user WHERE email = ?";
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
 
             try (ResultSet rs = pstmt.executeQuery()) {
-                // Traverse the result rows one at a time.
-                // Note: This specific while loop will only run at most once 
-                // since username is unique.
                 while (rs.next()) {
-                    // Note: rs.get.. functions access attributes of the current row.
                     String storedPasswordHash = rs.getString("password");
                     boolean isPassMatch = passwordEncoder.matches(password, storedPasswordHash);
-                    // Note: 
                     if (isPassMatch) {
                         int userId = rs.getInt("userId");
                         String firstName = rs.getString("firstName");
                         String lastName = rs.getString("lastName");
-
-                        // Initialize and retain the logged in user.
                         loggedInUser = new User(userId, email, password, firstName, lastName);
                     }
                     return isPassMatch;
@@ -106,13 +63,26 @@ public class UserService {
         return false;
     }
 
+    public User getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public void unAuthenticate() {
+        loggedInUser = null;
+    }
+
+    public boolean loanBookToUser(int bookId, int userId) throws SQLException {
+        try (Connection conn = getConnection()) {
+            UserDAOImpl dao = new UserDAOImpl(conn);
+            return dao.loanBook(bookId, userId);
+        }
+    }
+
     public void returnLoan(int loanId) throws SQLException {
         String sql = "UPDATE loan SET returnDate = CURDATE() WHERE loanId = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, loanId);
             stmt.executeUpdate();
         }
     }
-    
 }
