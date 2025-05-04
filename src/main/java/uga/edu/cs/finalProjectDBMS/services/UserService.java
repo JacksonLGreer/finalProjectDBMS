@@ -63,6 +63,18 @@ public class UserService {
         return false;
     }
 
+    public void updateUser(String firstName, String lastName, String email) throws SQLException {
+    if (loggedInUser == null) return;
+
+    try (Connection conn = getConnection()) {
+        UserDAOImpl dao = new UserDAOImpl(conn);
+        loggedInUser.setFirstName(firstName);
+        loggedInUser.setLastName(lastName);
+        loggedInUser.setEmail(email);
+        dao.updateUser(loggedInUser);
+    }
+}
+
     public User getLoggedInUser() {
         return loggedInUser;
     }
