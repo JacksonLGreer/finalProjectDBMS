@@ -105,4 +105,14 @@ public class UserService {
         }
         return false;
     }
+
+    public void returnLoan(int loanId) throws SQLException {
+        String sql = "UPDATE loan SET returnDate = CURDATE() WHERE loanId = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, loanId);
+            stmt.executeUpdate();
+        }
+    }
+    
 }
