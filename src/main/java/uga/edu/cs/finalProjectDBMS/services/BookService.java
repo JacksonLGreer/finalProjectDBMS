@@ -128,11 +128,11 @@ public class BookService {
             LEFT JOIN publisher p ON b.publisherId = p.publisherId
             LEFT JOIN bookAuthor ba ON b.bookId = ba.bookId
             LEFT JOIN author a ON ba.authorId = a.authorId
-            WHERE LOWER(a.firstName) LIKE ? OR LOWER(a.lastName) LIKE ?
+            WHERE LOWER(a.lastName) LIKE ?
         """;
     
         String likeQuery = "%" + query.toLowerCase() + "%";
-        return getBooksFromQuery(sql, likeQuery, likeQuery);
+        return getBooksFromQuery(sql, likeQuery);
     }
 
     /**

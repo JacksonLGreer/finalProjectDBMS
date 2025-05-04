@@ -1,0 +1,6 @@
+Security.txt
+
+Our website uses bcrypt password hashing to securely store passwords in our database.
+When signing up, users type in their password and confirm it.
+The program then uses the BCryptPasswordEncoder's .encode() function to hash the passwords.
+These hashes passwords are stored in the database and are secure in the fact that the original password canot be found in the DB.
