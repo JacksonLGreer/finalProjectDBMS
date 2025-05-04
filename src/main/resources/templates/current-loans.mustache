@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Current Loans</title>
+</head>
+<body>
+    <h1>Current Loans</h1>
+
+    {{#loans}}
+        <div style="margin-bottom: 20px;">
+            <strong>{{title}}</strong> ({{publicationYear}})<br>
+            Loaned on: {{loanDate}}
+        </div>
+    {{/loans}}
+
+    {{^loans}}
+        <p>You currently have no active loans.</p>
+    {{/loans}}
+
+    {{#error}}
+        <p style="color: red;">{{error}}</p>
+    {{/error}}
+
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+</body>
+</html>
