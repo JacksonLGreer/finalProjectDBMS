@@ -7,6 +7,21 @@
 <body>
     <h1>Welcome to Your Dashboard</h1>
 
+{{#loan}}
+    {{#is loan "success"}}
+        <p style="color:green;">✅ Book successfully loaned.</p>
+    {{/is}}
+    {{#is loan "failed"}}
+        <p style="color:red;">❌ Book is already loaned out.</p>
+    {{/is}}
+    {{#is loan "not_logged_in"}}
+        <p style="color:red;">⚠️ Please log in to loan a book.</p>
+    {{/is}}
+    {{#is loan "error"}}
+        <p style="color:red;">🚫 Something went wrong during loan processing.</p>
+    {{/is}}
+{{/loan}}
+
     <nav>
         <ul>
             <li><a href="/search">Search Books</a></li>
