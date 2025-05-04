@@ -16,10 +16,19 @@ public class UserDAOImpl implements UserDAO {
     public boolean registerUser(User user) {
         String sql = "INSERT INTO user (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            System.out.println("Email: " + user.getEmail());
             stmt.setString(1, user.getEmail());
+
+            System.out.println("Password: "+user.getPasswordHash());
             stmt.setString(2, user.getPasswordHash());
+
+            System.out.println("Fname: "+user.getFirstName());
             stmt.setString(3, user.getFirstName());
+
+            System.out.println("Lname: " +user.getLastName());
             stmt.setString(4, user.getLastName());
+            System.out.println("Registering: " + user.getEmail() + ", " + user.getPasswordHash());
+
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error during registration: " + e.getMessage());
@@ -53,4 +62,17 @@ public class UserDAOImpl implements UserDAO {
         User user = findUserByEmail(email);
         return user != null ; // && PasswordUtils.checkPassword(plainPassword, user.getPasswordHash());
     }
+
+    public boolean loanBook(int bookId, int userId) {
+        String sql = "INSERT INTO loan (loanDate, returnDate, bookId, userId) VALUES (CURDATE(), NULL, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bookId);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error loaning book: " + e.getMessage());
+            return false;
+        }
+    }
+    
 }

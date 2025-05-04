@@ -60,6 +60,14 @@ public class UserService {
         return loggedInUser;
     }
 
+
+    public boolean loanBookToUser(int bookId, int userId) throws SQLException {
+        try (Connection conn = getConnection()) {
+            UserDAOImpl dao = new UserDAOImpl(conn);
+            return dao.loanBook(bookId, userId);
+        }
+    }
+    
     /**
      * Authenticate user given the username and the password and
      * stores user object for the logged in user in session scope.
@@ -84,12 +92,12 @@ public class UserService {
                     boolean isPassMatch = passwordEncoder.matches(password, storedPasswordHash);
                     // Note: 
                     if (isPassMatch) {
-                        String userId = rs.getString("userId");
+                        int userId = rs.getInt("userId");
                         String firstName = rs.getString("firstName");
                         String lastName = rs.getString("lastName");
 
                         // Initialize and retain the logged in user.
-                        loggedInUser = new User(userId, email, firstName, lastName);
+                        loggedInUser = new User(userId, email, password, firstName, lastName);
                     }
                     return isPassMatch;
                 }
