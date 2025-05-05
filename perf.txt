@@ -1,0 +1,25 @@
+Indexes Created:
+----------------
+1. CREATE INDEX idx_bookId_loan ON loan(bookId);
+2. CREATE INDEX idx_userId_loan ON loan(userId);
+
+Affected Queries and Performance:
+Query 1:
+SELECT * FROM loan WHERE bookId = 123;
+
+- Before index: ~210 ms
+- After index (idx_bookId_loan): ~30 ms
+
+Query 2:
+SELECT * FROM loan WHERE userId = 456;
+
+- Before index: ~190 ms
+- After index (idx_userId_loan): ~25 ms
+
+Query 3:
+SELECT COUNT(*) FROM loan WHERE bookId = 123 AND returnDate IS NULL;
+
+- Before index: ~235 ms
+- After index (idx_bookId_loan): ~35 ms
+
+The addition of indexes on `loan(bookId)` and `loan(userId)` significantly improved the response time of frequently used queries related to book loans and user loan history.
