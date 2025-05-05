@@ -39,4 +39,7 @@ Database Details:
 
 Test Users:
 -----------
-
+These are created in the LibraryDataBuilder because the passwords need to be hashed before inserting
+1) email: jackson@test.com password: password
+2) email: daisy@test.com password: password
+3) email: jackson@test.com password: password

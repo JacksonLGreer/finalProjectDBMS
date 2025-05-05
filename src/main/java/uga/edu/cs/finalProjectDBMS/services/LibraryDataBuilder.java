@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class LibraryDataBuilder {
     static final String JDBC_URL = "jdbc:mysql://localhost:33306/dbms_library";
     static final String JDBC_USER = "root";
@@ -27,7 +29,8 @@ public class LibraryDataBuilder {
             insertAuthors(conn, 20);
             insertPublishers(conn);
             insertBooksAndAuthors(conn, 1000);
-
+            insertTestUsers(conn);
+            
             conn.commit();
             System.out.println("Data inserted successfully.");
         } catch (SQLException e) {
@@ -89,6 +92,30 @@ public class LibraryDataBuilder {
                     }
                 }
             }
+        }
+    }
+
+    // Inserts the test users with hashed passwords
+    static void insertTestUsers(Connection conn) throws SQLException {
+        String sql = "INSERT INTO user (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+            Object[][] users = {
+                {"jackson@test.com", "password", "Jackson", "Greer"},
+                {"daisy@test.com", "password", "Daisy", "Gryboski"},
+                {"miro@example.com", "password", "Miroslav", "Ostrovski"}
+            };
+
+            for (Object[] user : users) {
+                ps.setString(1, (String) user[0]);
+                ps.setString(2, encoder.encode((String) user[1]));
+                ps.setString(3, (String) user[2]);
+                ps.setString(4, (String) user[3]);
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            System.out.println("Test users inserted successfully.");
         }
     }
 

@@ -171,3 +171,14 @@ p[style*="color: green"] {
     font-weight: bold;
     margin-top: 10px;
 }
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.button-group a {
+    text-decoration: none;
+}

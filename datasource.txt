@@ -6,3 +6,7 @@ This file creates a list of 1000 random books and 20 random authors for filling 
 It works by taking a list of first and last names and creating 20 random authors.
 Then the program takes a list of key words and creates 1000 random book titles. They are also assigned a random publication year and publisher.
 As the books are inserted into the DB they are paired with an author in the BookAuthor table.
+
+The program also populates the database with three test users, 
+it is done in this file so that the passwords could be encrypted as that was not possible with a simple SQL insert.
+The test users are jackson@test.com, daisy@test.com, and miro@test.com. All three use 'password' as the password.
