@@ -30,11 +30,11 @@ public class LibraryDataBuilder {
             insertPublishers(conn);
             insertBooksAndAuthors(conn, 1000);
             insertTestUsers(conn);
-            
+
             conn.commit();
             System.out.println("Data inserted successfully.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Data already populated");
         }
     }
 

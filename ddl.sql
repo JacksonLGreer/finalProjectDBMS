@@ -60,3 +60,6 @@ create table if not exists bookAuthor (
     foreign key (bookId) references book(bookId),
     foreign key (authorId) references author(authorId)
 );
+
+CREATE INDEX idx_bookId_loan ON loan(bookId);
+CREATE INDEX idx_userId_loan ON loan(userId);
